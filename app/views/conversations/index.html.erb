@@ -1,3 +1,5 @@
-<% @conversations.each do |conversation| %>
-    <%= link_to conversation.name, conversation_path(conversation), class: "text-2xl text-white" %>
-<% end %>
+<div class="flex flex-col items-center">
+    <% @conversations.each do |conversation| %>
+      <%= link_to conversation.name, conversation_path(conversation), class: "text-2xl text-white" %>
+    <% end %>
+</div>
