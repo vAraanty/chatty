@@ -1,0 +1,24 @@
+<%= turbo_stream_from "conversation_#{@conversation.id}" %>
+
+<div class="flex flex-col items-center mb-4">
+  <h1 class="text-2xl font-bold"><%= @conversation.name %></h1>
+
+  <div id="messages" data-controller="scroll" 
+        class="w-2xl flex flex-col items-center bg-gray-100 mb-16">
+    <%= render @messages %>
+  </div>
+
+  <div class="w-2xl fixed bottom-2 bg-gray-100">
+    <%= form_with model: [@conversation, @message], 
+                  local: false, 
+                  class: "flex justify-between",
+                  data: { 
+                    controller: "reset-form", 
+                    action: "turbo:submit-end->reset-form#reset" 
+                  } do |form| %>
+      <%= form.text_field :content, placeholder: "Type a message...", 
+                                    class: "border-2 border-gray-300 rounded-md p-2 w-7/9" %>
+      <%= form.submit "Send", class: "bg-blue-500 text-white p-2 rounded-md w-1/6" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<menu class="h-full fixed top-0 left-0 w-0 bg-black text-white pt-4 
+             flex flex-col items-center overflow-hidden transition-all duration-300"
+      data-menu-target="menu">
+  <button data-action="menu#close" class="self-end mr-4 mb-4">X</button>
+  <%= link_to "Conversations", conversations_path, class: "text-2xl" %>
+  <% if !@current_user %>
+    <%= button_to 'Login', '/auth/auth0', class: "text-2xl cursor-pointer", method: :post, data: { turbo: false } %>
+  <% else %>
+    <%= link_to 'My Profile', 'javascript:void(0)', class: "text-2xl", data: { turbo: false } %>
+    <%= link_to 'Logout', '/auth/logout', class: "text-2xl", data: { turbo: false } %>
+  <% end %>
+</menu> 

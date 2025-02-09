@@ -21,7 +21,7 @@ gem "jbuilder"
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "tzinfo-data"
 
 # Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
 gem "solid_cache"
@@ -41,10 +41,10 @@ gem "thruster", require: false
 # gem "image_processing", "~> 1.2"
 
 # Auth0
-gem 'omniauth-auth0', '~> 3.1', '>= 3.1.1'
+gem "omniauth-auth0", "~> 3.1", ">= 3.1.1"
 
 # Auth0 CSRF Protection
-gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.2'
+gem "omniauth-rails_csrf_protection", "~> 1.0", ">= 1.0.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -70,3 +70,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "tailwindcss-ruby", "~> 4.0"
+
+gem "tailwindcss-rails", "~> 4.0"

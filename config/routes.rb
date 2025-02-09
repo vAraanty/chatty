@@ -11,13 +11,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  # 
-  root 'sessions#new'
+  #
+  root "homepage#show"
 
-  get '/auth/auth0/callback' => 'auth0#callback'
-  get '/auth/failure' => 'auth0#failure'
-  get '/auth/logout' => 'auth0#logout'
+  # TODO: make resourceful
+  get "/auth/auth0/callback" => "auth0#callback"
+  get "/auth/failure" => "auth0#failure"
+  get "/auth/logout" => "auth0#logout"
 
-  resources :sessions, only: [:new]
-
+  resources :conversations, only: [ :show, :index ] do
+    resources :messages, only: [ :create ]
+  end
 end

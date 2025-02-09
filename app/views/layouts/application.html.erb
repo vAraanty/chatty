@@ -7,6 +7,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <!-- TODO: add logo -->
 
     <%= yield :head %>
 
@@ -22,7 +23,14 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body data-controller="menu">
+    <%= render "shared/menu" %>
+
+    <button data-action="menu#open" class="fixed top-4 left-4 text-2xl">...</button>
+    
+    <main class="mt-4 px-5 flex justify-center transition-all duration-300"
+          data-menu-target="content">
+      <%= yield %>
+    </main>
   </body>
 </html>

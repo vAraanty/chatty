@@ -1,0 +1,25 @@
+FROM ruby:3.4.1-alpine
+
+# Install system dependencies
+RUN apk add --no-cache \
+    build-base \
+    git \
+    sqlite-dev \
+    pkgconfig \
+    curl
+
+# Set working directory
+WORKDIR /app
+
+# Install bundler
+RUN gem install bundler
+
+# Copy Gemfile and install dependencies
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+# Copy the rest of the application
+COPY . .
+
+# Start the main process
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
