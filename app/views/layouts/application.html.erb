@@ -28,7 +28,8 @@
 
     <button data-action="menu#open" class="fixed top-4 left-4 text-2xl">...</button>
     
-    <main class="mt-4 px-5 flex justify-center transition-all duration-300"
+    <main class="mt-4 px-5 flex justify-center transition-all duration-300
+                <%= open_menu? ? "ml-75" : "ml-0" %>"
           data-menu-target="content">
       <%= yield %>
     </main>
