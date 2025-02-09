@@ -14,21 +14,21 @@ export default class extends Controller {
     console.log("Observing new messages...");
     const observer = new MutationObserver(() => {
       console.log("New message detected");
-      if (this.isAtBottom()) {
+      // if (this.isAtBottom()) {
         console.log("User was at bottom, scrolling...");
         this.scrollToBottom();
-      } else {
-        console.log("User was not at bottom, not scrolling");
-      }
+      // } // else {
+      //   console.log("User was not at bottom, not scrolling");
+      // }
     });
 
     observer.observe(this.element, { childList: true, subtree: true });
   }
 
-  isAtBottom() { // Does not work as expected
-    const distanceFromBottom =
-      this.element.scrollHeight - this.element.scrollTop - this.element.clientHeight;
-    console.log("Distance from bottom:", distanceFromBottom);
-    return distanceFromBottom < 50;
-  }
+  // isAtBottom() { // Does not work as expected
+  //   const distanceFromBottom =
+  //     this.element.scrollHeight - this.element.scrollTop - this.element.clientHeight;
+  //   console.log("Distance from bottom:", distanceFromBottom);
+  //   return distanceFromBottom < 50;
+  // }
 }

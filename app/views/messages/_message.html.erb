@@ -1,9 +1,10 @@
 <div id="message_<%= message.id %>"
-     class="mt-2 min-w-20 w-fit max-w-xs 
+     class="mt-2 min-w-20 w-fit max-w-xs opacity-0 transition-opacity duration-100
             <%= message.user == @current_user ? 'self-end' : 'self-start' %>
-            <%= message.user == @current_user ? 'text-right' : 'text-left' %>">
-    <div class="flex flex-col border-2 border-gray-300
-                rounded-md p-2 <%= message.user == @current_user ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black' %>">
+            <%= message.user == @current_user ? 'text-right' : 'text-left' %>"
+     data-controller="message">
+    <div class="flex flex-col border-1 border-gray-300
+                rounded-md p-2 text-white <%= message.user == @current_user ? 'bg-blue-900' : 'bg-gray-900' %>">
         <!-- <strong><%= message.user.name %></strong> -->
         <p><%= message.content %></p>
         <p class="text-xs"><%= message.created_at.strftime("%H:%M") %></p>

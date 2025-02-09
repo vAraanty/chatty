@@ -1,5 +1,5 @@
-<menu class="h-full fixed top-0 left-0 bg-black text-white pt-4 
-             flex flex-col items-center overflow-hidden transition-all duration-300
+<menu class="h-full fixed top-0 left-0 bg-black text-white pt-4 border-r border-gray-700
+             flex flex-col items-center overflow-hidden transition-all duration-300 z-10
              <%= open_menu? ? "w-75" : "w-0" %>"
       data-menu-target="menu">
   <button data-action="menu#close" class="self-end mr-4 mb-4">X</button>
@@ -13,6 +13,7 @@
       <%= button_to 'Login', '/auth/auth0', class: "text-2xl cursor-pointer", method: :post, data: { turbo: false } %>
     <% else %>
       <p class="text-xl text-gray-500 mb-4">@<%= @current_user.tag %></p>
+
       <%= link_to 'My Profile', 'javascript:void(0)', class: "text-2xl", data: { turbo: false } %>
       <%= link_to 'Logout', '/auth/logout', class: "text-2xl", data: { turbo: false } %>
     <% end %>
