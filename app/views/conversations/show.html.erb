@@ -11,20 +11,21 @@
     <%= render @messages %>
   </div>
 
-  <div class="w-full bg-black text-white mb-2 pt-2 px-2">
+  <div class="w-full bg-black text-white mb-2 pt-2 px-2" data-controller="chat-input">
     <%= form_with model: [@conversation, @message], 
                   local: false, 
                   class: "flex justify-between",
                   data: { 
                     controller: "reset-form", 
-                    action: "turbo:submit-end->reset-form#reset" 
+                    action: "turbo:submit-end->reset-form#reset",
+                    'chat-input-target': "form"
                   } do |form| %>
       <%= form.text_area :content, placeholder: "Type a message...", 
                                     class: "border-2 border-gray-300 rounded-md p-2 flex-1 resize-none h-auto max-h-60",
                                     autocomplete: "off",
                                     data: { 
-                                      controller: "chat-input",
-                                      action: "input->chat-input#resize" 
+                                      action: "input->chat-input#resize keydown.enter->chat-input#submitForm",
+                                      'chat-input-target': "input"
                                     } %>
       <%= form.submit "Send", class: "bg-blue-500 text-white w-20 p-2 rounded-md ml-2" %>
     <% end %>
