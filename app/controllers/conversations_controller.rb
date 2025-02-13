@@ -4,8 +4,11 @@ class ConversationsController < ApplicationController
   end
 
   def show
-    @conversation = current_user.conversations.find(params[:id])
+    @conversation = current_user.conversations.find_by(id: params[:id])
+
+    authorize @conversation, policy_class: ConversationPolicy
+
     @messages = @conversation.messages
-    @message = Message.new
+    @message  = Message.new
   end
 end

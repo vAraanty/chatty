@@ -1,9 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
-const MENU_OPEN_WIDTH_CLASS = `w-75`
+const MENU_OPEN_WIDTH_CLASS = `w-38`
 const MENU_CLOSED_WIDTH_CLASS = `w-0`
 
-const MENU_OPEN_CONTENT_CLASS = `ml-75`
+const MENU_OPEN_CONTENT_CLASS = `ml-38`
 const MENU_CLOSED_CONTENT_CLASS = `ml-0`
 
 // Connects to data-controller="menu"

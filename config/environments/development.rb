@@ -73,5 +73,4 @@ Rails.application.configure do
   # config.generators.apply_rubocop_autocorrect_after_generate!
 
   config.hosts << "2478-213-109-233-56.ngrok-free.app"
-
 end

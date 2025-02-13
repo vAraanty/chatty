@@ -24,12 +24,15 @@
   </head>
 
   <body data-controller="menu">
+    <%# Add this line to render flash messages %>
+    <%= render "shared/flash" %>
+
     <%= render "shared/menu" %>
 
     <button data-action="menu#open" class="fixed top-4 left-4 text-2xl text-white">...</button>
     
     <main class="flex justify-center transition-all duration-300 bg-black
-                <%= open_menu? ? "ml-75" : "ml-0" %>"
+                <%= open_menu? ? "ml-38" : "ml-0" %>"
           data-menu-target="content">
       <%= yield %>
     </main>
