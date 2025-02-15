@@ -1,0 +1,43 @@
+<div class="min-h-screen w-full max-w-4xl mx-auto px-4 py-8">
+  <div class="p-8">
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-bold text-white"><%= t('.title') %></h1>
+
+      <% if @user == @current_user %>
+        <%= link_to t('.edit_profile'), edit_user_path(@user), class: "px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700" %>
+      <% end %>
+    </div>
+
+    <div class="space-y-6">
+      <!-- Profile Picture -->
+      <div class="flex items-center space-x-4">
+        <div class="w-24 h-24 bg-gray-700 rounded-full flex items-center justify-center">
+          <span class="text-4xl text-white"><%= @user.name.first.upcase %></span>
+        </div>
+      </div>
+
+      <!-- Profile Information -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <p class="text-gray-400"><%= t('.profile_info.name') %></p>
+          <p class="text-xl text-white"><%= @user.name %></p>
+        </div>
+
+        <div class="space-y-2">
+          <p class="text-gray-400"><%= t('.profile_info.username') %></p>
+          <p class="text-xl text-white">@<%= @user.tag %></p>
+        </div>
+
+        <div class="space-y-2">
+          <p class="text-gray-400"><%= t('.profile_info.email') %></p>
+          <p class="text-xl text-white"><%= @user.email %></p>
+        </div>
+
+        <div class="space-y-2">
+          <p class="text-gray-400"><%= t('.profile_info.member_since') %></p>
+          <p class="text-xl text-white"><%= @user.created_at.strftime("%B %Y") %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

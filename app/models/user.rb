@@ -1,5 +1,27 @@
 class User < ApplicationRecord
-  has_many :user_conversations, dependent: :destroy
+  # == Extensions ===========================================================
+
+  # == Constants ============================================================
+
+  # == Attributes ===========================================================
+
+  # == Relationships ========================================================
+  with_options dependent: :destroy do
+    has_many :user_conversations
+    has_many :messages
+  end
+
   has_many :conversations, through: :user_conversations
-  has_many :messages, dependent: :destroy
+
+  has_many_attached :avatars
+
+  # == Validations ==========================================================
+
+  # == Scopes ===============================================================
+
+  # == Callbacks ============================================================
+
+  # == Class Methods ========================================================
+
+  # == Instance Methods ====================================================
 end

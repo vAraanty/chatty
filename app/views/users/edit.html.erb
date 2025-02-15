@@ -1,0 +1,71 @@
+<div class="min-h-screen w-full max-w-4xl mx-auto px-4 py-8">
+  <div class="p-8">
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-bold text-white"><%= t('.title') %></h1>
+    </div>
+
+    <%= form_with(model: @user, class: "space-y-6") do |f| %>
+      <div class="space-y-6">
+        <!-- Profile Picture -->
+        <div class="flex items-center space-x-4">
+          <div class="w-24 h-24 bg-gray-700 rounded-full flex items-center justify-center">
+            <span class="text-4xl text-white"><%= @user.name.first.upcase %></span>
+          </div>
+          <!-- TODO: Add avatar upload functionality -->
+          <%#= f.file_field :avatar, class: "text-white" %>
+        </div>
+
+        <!-- Profile Information -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <%= f.label :name, t('.profile_info.name'), class: "text-gray-400" %>
+            <%= f.text_field :name, 
+                class: "w-full bg-gray-800 text-white rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
+
+            <% if @errors && @errors[:name] %>
+              <div class="text-red-500 text-sm mt-1">
+                <% @errors[:name].each do |message| %>
+                  <span><%= message %></span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="space-y-2">
+            <%= f.label :tag, t('.profile_info.username'), class: "text-gray-400" %>
+            <div class="flex items-center bg-gray-800 rounded">
+              <span class="text-gray-400 px-3">@</span>
+              <%= f.text_field :tag, 
+                  class: "w-full bg-gray-800 text-white px-0 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded" %>
+            </div>
+
+            <% if @errors && @errors[:tag] %>
+              <div class="text-red-500 text-sm mt-1">
+                <% @errors[:tag].each do |message| %>
+                  <span><%= message %></span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="space-y-2">
+            <p class="text-gray-400"><%= t('.profile_info.email') %></p>
+            <p class="text-xl text-white"><%= @user.email %></p>
+          </div>
+
+          <div class="space-y-2">
+            <p class="text-gray-400"><%= t('.profile_info.member_since') %></p>
+            <p class="text-xl text-white"><%= @user.created_at.strftime("%B %Y") %></p>
+          </div>
+        </div>
+
+        <div class="flex justify-end space-x-4">
+          <%= link_to t('.cancel'), user_path(@user), 
+              class: "px-4 py-2 text-white rounded hover:bg-gray-700" %>
+          <%= f.submit t('.save_changes'), 
+              class: "px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 cursor-pointer" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

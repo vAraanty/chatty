@@ -6,7 +6,9 @@ RUN apk add --no-cache \
     git \
     sqlite-dev \
     pkgconfig \
-    curl
+    curl \
+    vips-dev \
+    libjpeg-turbo-dev
 
 # Set working directory
 WORKDIR /app

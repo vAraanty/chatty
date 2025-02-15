@@ -5,7 +5,8 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
     './app/views/**/*.{erb,haml,html,slim}',
-    './config/locales/*.yml'
+    './config/locales/*.yml',
+    './config/initializers/constants.rb'
   ],
   plugins: [],
   corePlugins: {

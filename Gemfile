@@ -46,6 +46,13 @@ gem "omniauth-auth0", "~> 3.1", ">= 3.1.1"
 # Auth0 CSRF Protection
 gem "omniauth-rails_csrf_protection", "~> 1.0", ">= 1.0.2"
 
+# Dry Validation
+gem "dry-validation", "~> 1.11", ">= 1.11.1"
+gem "dry-monads",     "~> 1.7",  ">= 1.7.1"
+
+# Dry Transaction
+gem "dry-transaction", "~> 0.16.0"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

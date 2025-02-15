@@ -28,4 +28,64 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  shared:
+    menu:
+      chats: "Chats"
+      login: "Login"
+      logout: "Logout"
+      my_profile: "My Profile"
+  
+  users:
+    show:
+      title: "My Profile"
+      edit_profile: "Edit Profile"
+      profile_info:
+        name: "Name"
+        username: "Username"
+        email: "Email"
+        member_since: "Member Since"
+    edit:
+      title: "Edit Profile"
+      profile_info:
+        name: "Name"
+        username: "Username"
+        email: "Email"
+        member_since: "Member Since"
+      cancel: "Cancel"
+      save_changes: "Save Changes"
+    update:
+      success: "Your changes have been saved successfully."
+
+  homepage:
+    show:
+      hero:
+        title_1: "Connect with anyone,"
+        title_2: "anywhere in the world"
+        description: "Start meaningful conversations, share ideas, and build relationships with our secure and intuitive chat platform."
+        get_started: "Get Started"
+        sign_in: "Sign In"
+      features:
+        section_title: "Features"
+        subtitle: "Everything you need to connect"
+        real_time:
+          title: "Real-time Messaging"
+          description: "Instant message delivery with real-time updates and notifications."
+        secure:
+          title: "Secure Chats"
+          description: "End-to-end encryption keeps your conversations private and secure."
+        groups:
+          title: "Group Chats"
+          description: "Create and manage group conversations with multiple participants."
+
+  app:
+    name: "Auth Zero"
+
+  dry_validation:
+    rules:
+      name: "Name"
+      tag: "Username"
+    errors:
+      already_taken: "is already taken"
+      users:
+        # TODO: Make it under the tag key.
+        invalid_format: "must contain only letters, numbers, underscores, and hyphens"
