@@ -39,6 +39,7 @@ en:
     show:
       title: "My Profile"
       edit_profile: "Edit Profile"
+      start_conversation: "Start Conversation"
       profile_info:
         name: "Name"
         username: "Username"
@@ -55,6 +56,12 @@ en:
       save_changes: "Save Changes"
     update:
       success: "Your changes have been saved successfully."
+
+  conversations:
+    create:
+      failure: "Unable to create or fetch conversation."
+    index:
+      title: "Conversations"
 
   homepage:
     show:

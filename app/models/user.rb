@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   has_many :conversations, through: :user_conversations
 
-  has_many_attached :avatars
+  has_one_attached :avatar
 
   # == Validations ==========================================================
 

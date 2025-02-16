@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get "/auth/failure" => "auth0#failure"
   get "/auth/logout" => "auth0#logout"
 
-  resources :conversations, only: [ :show, :index ] do
+  resources :conversations, only: [ :index, :show, :create ] do
     resources :messages, only: [ :create ]
   end
 

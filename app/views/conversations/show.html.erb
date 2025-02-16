@@ -3,7 +3,15 @@
 <div class="flex flex-col items-center w-full bg-black h-dvh">
   <div class="w-full bg-inherit text-white border-b border-gray-700 py-2 px-3 flex">
     <%= link_to "Back", conversations_path, class: "text-2xl text-white flex-initial" %>
-    <p class="text-2xl text-white font-bold text-center flex-1"><%= @conversation.name %></p>
+    <% if @conversation.direct_conversation? %>
+      <% other_user = @conversation.users.where.not(id: @current_user.id).first %>
+
+      <%= link_to user_path(other_user), class: "text-2xl text-white font-bold text-center flex-1" do %>
+        <%= other_user.name %>
+      <% end %>
+    <% else %>
+      <p class="text-2xl text-white font-bold text-center flex-1"><%= @conversation.name %></p>
+    <% end %>
   </div>
 
   <div id="messages" data-controller="scroll" 

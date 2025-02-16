@@ -1,5 +1,57 @@
-<div class="flex flex-col items-center">
+<div class="flex flex-col w-full">
+  <div class="w-full bg-inherit text-white border-b border-gray-700 py-2 px-3 flex">
+    <p class="text-2xl text-white font-bold text-center flex-1"><%= t('.title') %></p>
+  </div>
+
+  <div class="flex flex-col w-full">
     <% @conversations.each do |conversation| %>
-      <%= link_to conversation.name, conversation_path(conversation), class: "text-2xl text-white" %>
+      <%= link_to conversation_path(conversation), class: "flex items-center w-full border-b border-gray-700 hover:bg-gray-800" do %>
+        <div class="flex my-4 px-3">
+          <% if conversation.direct_conversation? %>
+            <% other_user = conversation.users.where.not(id: @current_user.id).first %>
+
+            <% if other_user.avatar.attached? %>
+              <div class="border-3 border-gray-700 rounded-full w-15 h-15 flex items-center justify-center">
+                <%= image_tag(other_user.avatar, alt: other_user.name, class: "object-cover h-full w-full rounded-full") %>
+              </div>
+            <% else %>
+              <div class="text-2xl border-3 border-gray-700 rounded-full w-15 h-15 flex items-center justify-center 
+                                <%= CHAT_BACKGROUND_COLORS[conversation.id % CHAT_BACKGROUND_COLORS.size] %>">
+                <%= other_user.name.first.capitalize %>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="text-2xl border-3 border-gray-700 rounded-full w-15 h-15 flex items-center justify-center
+                                <%= CHAT_BACKGROUND_COLORS[conversation.id % CHAT_BACKGROUND_COLORS.size] %>">
+              <%= conversation.name.first.capitalize %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="flex flex-col items-start flex-1">
+          <p class="text-lg text-white font-bold text-center">
+            <% if conversation.direct_conversation? %>
+              <%= other_user.name %>
+            <% else %>
+              <%= conversation.name %>
+            <% end %>
+          </p>
+
+          <p class="text-gray-400 text-center"><%= conversation.messages.order(:created_at).last.content %></p>
+        </div>
+
+        <div class="flex mr-4">
+          <p class="text-gray-400 text-center">
+            <% last_message = conversation.messages.order(:created_at).last %>
+
+            <% if last_message.created_at.today? %>
+              <%= last_message.created_at.strftime("%H:%M") %>
+            <% else %>
+              <%= last_message.created_at.strftime("%d/%m/%Y") %>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
     <% end %>
+  </div>
 </div>

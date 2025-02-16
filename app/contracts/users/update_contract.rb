@@ -9,6 +9,7 @@ module Users
     params do
       required(:name).filled(:string)
       required(:tag).filled(:string)
+      optional(:avatar)
     end
 
     rule(:tag) do
