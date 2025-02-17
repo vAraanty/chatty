@@ -62,6 +62,9 @@ en:
       failure: "Unable to create or fetch conversation."
     index:
       title: "Conversations"
+    show:
+      back: "Back"
+      send: "Send"
 
   homepage:
     show:
