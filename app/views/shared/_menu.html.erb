@@ -5,14 +5,36 @@
   <button data-action="menu#close" class="self-end mr-4 mb-4">X</button>
 
   <div class="flex-1 flex flex-col items-center">
-    <%= link_to t('shared.menu.chats'), conversations_path, class: "text-2xl pb-4 border-b border-gray-700" %>
+    <% if @current_user %>
+      <%= link_to t('shared.menu.chats'), conversations_path, class: "text-2xl pb-4 border-b border-gray-700" %>
 
-    <% Conversation.all.each do |conversation| %>
-      <%= link_to conversation.name.first.capitalize, 
-                  conversation_path(conversation), 
-                  class: "text-2xl border-3 border-gray-700 rounded-full py-3 px-5 mt-3 w-15 h-15 
-                          flex items-center justify-center #{CHAT_BACKGROUND_COLORS[conversation.id % CHAT_BACKGROUND_COLORS.size]}",
-                  title: conversation.name %>
+      <% @current_user.conversations.each do |conversation| %>
+        <% if conversation.direct_conversation? %>
+          <% other_user = conversation.users.where.not(id: @current_user.id).first %>
+
+          <% if other_user.avatar.attached? %>
+            <%= link_to conversation_path(conversation), 
+                        title: other_user.name, 
+                        class: "border-3 border-gray-700 rounded-full mt-3 w-15 h-15 flex items-center justify-center" do %>
+              <%= image_tag(other_user.avatar, alt: other_user.name, class: "object-cover h-full w-full rounded-full") %>
+            <% end %>
+          <% else %>
+            <%= link_to conversation_path(conversation), 
+                        title: other_user.name, 
+                        class: "text-2xl border-3 border-gray-700 rounded-full mt-3 w-15 h-15 flex items-center justify-center 
+                                #{CHAT_BACKGROUND_COLORS[conversation.id % CHAT_BACKGROUND_COLORS.size]}" do %>
+              <%= other_user.name.first.capitalize %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= link_to conversation_path(conversation), 
+                      title: conversation.name, 
+                      class: "text-2xl border-3 border-gray-700 rounded-full mt-3 w-15 h-15 flex items-center justify-center
+                               #{CHAT_BACKGROUND_COLORS[conversation.id % CHAT_BACKGROUND_COLORS.size]}" do %>
+            <%= conversation.name.first.capitalize %>
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 
@@ -22,7 +44,7 @@
     <% else %>
       <p class="text-xl text-gray-500 mb-4">@<%= @current_user.tag %></p>
 
-      <%= link_to t('shared.menu.my_profile'), user_path(@current_user), class: "text-2xl", data: { turbo: false } %>
+      <%= link_to t('shared.menu.my_profile'), user_path(ME_IDENTIFIER), class: "text-2xl", data: { turbo: false } %>
       <%= link_to t('shared.menu.logout'), '/auth/logout', class: "text-2xl", data: { turbo: false } %>
     <% end %>
   </div>
