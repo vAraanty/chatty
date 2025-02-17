@@ -2,7 +2,7 @@
 
 <div class="flex flex-col items-center w-full bg-black h-dvh">
   <div class="w-full bg-inherit text-white border-b border-gray-700 py-2 px-3 flex">
-    <%= link_to "Back", conversations_path, class: "text-2xl text-white flex-initial" %>
+    <%= link_to t('conversations.show.back'), conversations_path, class: "text-2xl text-white flex-initial" %>
     <% if @conversation.direct_conversation? %>
       <% other_user = @conversation.users.where.not(id: @current_user.id).first %>
 
@@ -40,7 +40,7 @@
                                       action: "input->chat-input#resize keydown.enter->chat-input#submitForm",
                                       'chat-input-target': "input"
                                     } %>
-      <%= form.submit "Send", class: "bg-blue-500 text-white w-20 p-2 rounded-md" %>
+      <%= form.submit t('conversations.show.send'), class: "bg-blue-500 text-white w-20 p-2 rounded-md" %>
     <% end %>
   </div>
 </div>
