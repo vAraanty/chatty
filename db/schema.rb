@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_16_141628) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_17_171440) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,6 +56,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_16_141628) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "stripe_subscription_id"
+    t.integer "status"
+    t.string "plan_name"
+    t.datetime "current_period_start"
+    t.datetime "current_period_end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
   create_table "user_conversations", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "conversation_id", null: false
@@ -72,12 +84,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_16_141628) do
     t.string "provider_id"
     t.string "email"
     t.string "tag"
+    t.string "stripe_customer_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "subscriptions", "users"
   add_foreign_key "user_conversations", "conversations"
   add_foreign_key "user_conversations", "users"
 end

@@ -1,20 +1,21 @@
-class User < ApplicationRecord
+class Subscription < ApplicationRecord
   # == Extensions ===========================================================
 
   # == Constants ============================================================
 
   # == Attributes ===========================================================
+  enum :status, {
+    trialing: 0,
+    active: 1,
+    past_due: 2,
+    canceled: 3,
+    incomplete: 4,
+    incomplete_expired: 5,
+    unpaid: 6
+  }
 
   # == Relationships ========================================================
-  with_options dependent: :destroy do
-    has_many :user_conversations
-    has_many :messages
-    has_one :subscription
-  end
-
-  has_many :conversations, through: :user_conversations
-
-  has_one_attached :avatar
+  belongs_to :user
 
   # == Validations ==========================================================
 
@@ -25,15 +26,7 @@ class User < ApplicationRecord
   # == Class Methods ========================================================
 
   # == Instance Methods ====================================================
-  def subscribed?
-    subscription&.active?
-  end
-
-  def trial?
-    subscription&.trial?
-  end
-
-  def subscription_status
-    subscription&.status
+  def stopped?
+    status.blank? || status.in?(%i[past_due canceled incomplete incomplete_expired unpaid])
   end
 end

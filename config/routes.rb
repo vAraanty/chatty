@@ -24,4 +24,13 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [ :show, :edit, :update ]
+  resources :subscriptions, only: [ :index ]
+
+  namespace :api do
+    namespace :v1 do
+      namespace :stripe do
+        resource :webhook, only: [ :create ]
+      end
+    end
+  end
 end

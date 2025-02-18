@@ -1,11 +1,31 @@
 # ./app/controllers/auth0_controller.rb
 class Auth0Controller < ApplicationController
   def callback
+    # TODO: refactor to use transaction
     auth_info = request.env["omniauth.auth"]["extra"]["raw_info"]
 
+
+
     user = User.find_or_create_by(provider_id: auth_info["sub"]) do |user|
-      user.name  = auth_info["name"]
-      user.email = auth_info["email"]
+      tag = auth_info["nickname"]
+
+      while User.exists?(tag: tag)
+        tag = "#{tag}-#{rand(1000)}"
+      end
+
+      user.tag = tag
+      user.email = auth_info["name"]
+
+      # Create Stripe customer
+      stripe_customer = ::Stripe::Customer.create(
+        email: user.email,
+        name: user.name,
+        metadata: {
+          auth0_id: auth_info["sub"]
+        }
+      )
+
+      user.stripe_customer_id = stripe_customer.id
       # TODO: handle profile picture
     end
 
