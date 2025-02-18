@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_17_171440) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_18_173918) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -85,6 +85,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_17_171440) do
     t.string "email"
     t.string "tag"
     t.string "stripe_customer_id"
+    t.boolean "onboarding_completed", default: false, null: false
+    t.integer "onboarding_step", default: 0, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

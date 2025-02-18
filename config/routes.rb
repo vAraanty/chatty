@@ -33,4 +33,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resource :onboarding, only: [ :show, :update ], controller: "onboarding"
 end

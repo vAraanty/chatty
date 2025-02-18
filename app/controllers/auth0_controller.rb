@@ -4,8 +4,6 @@ class Auth0Controller < ApplicationController
     # TODO: refactor to use transaction
     auth_info = request.env["omniauth.auth"]["extra"]["raw_info"]
 
-
-
     user = User.find_or_create_by(provider_id: auth_info["sub"]) do |user|
       tag = auth_info["nickname"]
 
@@ -15,8 +13,10 @@ class Auth0Controller < ApplicationController
 
       user.tag = tag
       user.email = auth_info["name"]
+      user.onboarding_step = :profile
 
       # Create Stripe customer
+      # TODO: move to background job
       stripe_customer = ::Stripe::Customer.create(
         email: user.email,
         name: user.name,
@@ -32,7 +32,11 @@ class Auth0Controller < ApplicationController
     session[:user_info] = auth_info
     session[:user_id] = user.id
 
-    redirect_to root_path
+    if !user.onboarding_completed?
+      redirect_to onboarding_path
+    else
+      redirect_to root_path
+    end
   end
 
   def failure
