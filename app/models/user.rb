@@ -4,6 +4,11 @@ class User < ApplicationRecord
   # == Constants ============================================================
 
   # == Attributes ===========================================================
+  enum :onboarding_step, {
+    profile: 0,
+    subscription: 1,
+    completed: 2
+  }
 
   # == Relationships ========================================================
   with_options dependent: :destroy do
