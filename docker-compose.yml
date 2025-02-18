@@ -30,3 +30,13 @@ services:
     command: rails tailwindcss:watch
     stdin_open: true
     tty: true
+
+  stripe-cli:
+    image: stripe/stripe-cli:latest
+    network_mode: host
+    depends_on:
+      - web
+    environment:
+      STRIPE_API_KEY: "${STRIPE_API_KEY}"
+      STRIPE_DEVICE_NAME: "stripe-dev"
+    command: listen --forward-to http://localhost:3000/api/v1/stripe/webhook
