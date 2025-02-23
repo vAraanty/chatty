@@ -9,6 +9,7 @@ services:
       - .:/app
     environment:
       - RAILS_ENV=development
+      - EDITOR=vi
     tty: true
     stdin_open: true
     entrypoint: ./entrypoint.dev.sh
@@ -40,3 +41,28 @@ services:
       STRIPE_API_KEY: "${STRIPE_API_KEY}"
       STRIPE_DEVICE_NAME: "stripe-dev"
     command: listen --forward-to http://localhost:3000/api/v1/stripe/webhook
+
+  opensearch:
+    image: opensearchproject/opensearch:latest
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - plugins.security.disabled=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+
+volumes:
+  opensearch-data:
+  

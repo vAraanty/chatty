@@ -23,8 +23,16 @@ Rails.application.routes.draw do
     resources :messages, only: [ :create ]
   end
 
+  namespace :users do
+    resources :search, only: [ :index ]
+  end
+
   resources :users, only: [ :show, :edit, :update ]
   resources :subscriptions, only: [ :index ]
+
+
+  resource :onboarding, only: [ :show, :update ], controller: "onboarding"
+
 
   namespace :api do
     namespace :v1 do
@@ -33,6 +41,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  resource :onboarding, only: [ :show, :update ], controller: "onboarding"
 end

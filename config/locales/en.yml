@@ -34,10 +34,11 @@ en:
       login: "Login"
       logout: "Logout"
       my_profile: "My Profile"
+      search: "Search"
   
   users:
     show:
-      title: "My Profile"
+      title: "Profile"
       edit_profile: "Edit Profile"
       start_conversation: "Start Conversation"
       profile_info:
@@ -57,6 +58,13 @@ en:
       save_changes: "Save Changes"
     update:
       success: "Your changes have been saved successfully."
+    search:
+      index:
+        title: "Search Users"
+        search_placeholder: "Search by name or username..."
+      results:
+        no_results: "No users found"
+        view_profile: "View Profile"
 
   conversations:
     create:
