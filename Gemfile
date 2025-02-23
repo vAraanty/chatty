@@ -56,6 +56,9 @@ gem "dry-transaction", "~> 0.16.0"
 # Stripe
 gem "stripe", "~> 13.4", ">= 13.4.1"
 
+# OpenSearch
+gem "opensearch-ruby", "~> 3.4"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -73,6 +76,9 @@ group :development do
 
   # Ruby Language Server
   gem "ruby-lsp"
+
+  # Annotate Rails models
+  gem "annotaterb"
 end
 
 group :test do

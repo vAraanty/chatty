@@ -1,5 +1,21 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                   :integer          not null, primary key
+#  email                :string
+#  name                 :string
+#  onboarding_completed :boolean          default(FALSE), not null
+#  onboarding_step      :integer          default("profile"), not null
+#  tag                  :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  provider_id          :string
+#  stripe_customer_id   :string
+#
 class User < ApplicationRecord
   # == Extensions ===========================================================
+  include Searchable
 
   # == Constants ============================================================
 
@@ -28,6 +44,9 @@ class User < ApplicationRecord
   # == Callbacks ============================================================
 
   # == Class Methods ========================================================
+  def self.searchable_fields
+    [ :email, :name, :tag ]
+  end
 
   # == Instance Methods ====================================================
   def subscribed?
