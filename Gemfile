@@ -91,4 +91,4 @@ gem "tailwindcss-ruby", "~> 4.0"
 
 gem "tailwindcss-rails", "~> 4.1"
 
-gem "pundit", "~> 2.4"
+gem "pundit", "~> 2.5"
