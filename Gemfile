@@ -48,7 +48,7 @@ gem "omniauth-rails_csrf_protection", "~> 1.0", ">= 1.0.2"
 
 # Dry Validation
 gem "dry-validation", "~> 1.11", ">= 1.11.1"
-gem "dry-monads",     "~> 1.7",  ">= 1.7.1"
+gem "dry-monads",     "~> 1.8"
 
 # Dry Transaction
 gem "dry-transaction", "~> 0.16.0"
