@@ -1,41 +1,22 @@
 # ./app/controllers/auth0_controller.rb
 class Auth0Controller < ApplicationController
   def callback
-    # TODO: refactor to use transaction
     auth_info = request.env["omniauth.auth"]["extra"]["raw_info"]
 
-    user = User.find_or_create_by(provider_id: auth_info["sub"]) do |user|
-      tag = auth_info["nickname"]
-
-      while User.exists?(tag: tag)
-        tag = "#{tag}-#{rand(1000)}"
+    Auth0::Callback.call(auth_info: auth_info, session: session) do |on|
+      on.success do |result|
+        user = result[:user]
+        if !user.onboarding_completed?
+          redirect_to onboarding_path
+        else
+          redirect_to root_path
+        end
       end
 
-      user.tag = tag
-      user.email = auth_info["name"]
-      user.onboarding_step = :profile
-
-      # Create Stripe customer
-      # TODO: move to background job
-      stripe_customer = ::Stripe::Customer.create(
-        email: user.email,
-        name: user.name,
-        metadata: {
-          auth0_id: auth_info["sub"]
-        }
-      )
-
-      user.stripe_customer_id = stripe_customer.id
-      # TODO: handle profile picture
-    end
-
-    session[:user_info] = auth_info
-    session[:user_id] = user.id
-
-    if !user.onboarding_completed?
-      redirect_to onboarding_path
-    else
-      redirect_to root_path
+      on.failure do |error|
+        @error_msg = error
+        render :failure
+      end
     end
   end
 
