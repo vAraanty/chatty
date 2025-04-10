@@ -54,7 +54,7 @@ gem "dry-monads",     "~> 1.7",  ">= 1.7.1"
 gem "dry-transaction", "~> 0.16.0"
 
 # Stripe
-gem "stripe", "~> 13.4", ">= 13.4.1"
+gem "stripe", "~> 15.0"
 
 # OpenSearch
 gem "opensearch-ruby", "~> 3.4"
